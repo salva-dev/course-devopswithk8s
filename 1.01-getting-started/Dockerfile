@@ -6,9 +6,9 @@ WORKDIR /usr/src/app
 COPY ./project .
 
 # Build the project
-RUN ./mvnw package && cp target/*jar ./app.jar
+RUN ./mvnw package && cp target/*jar target/app.jar
 
-RUN java -jar app.jar
+RUN java -jar target/app.jar
 
 # FROM alpine:3.15.11
 # EXPOSE 8080
