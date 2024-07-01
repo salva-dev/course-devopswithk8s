@@ -8,6 +8,8 @@ $ docker push salvahappydev/log-output:latest
 $ kubectl create deployment log-output --image=salvahappydev/log-output 
 deployment.apps/log-output created
 
+
+
 $ kubectl get pods
 NAME                         READY   STATUS    RESTARTS   AGE
 log-output-6c75cd7f8-z2j42   1/1     Running   0          3m23s
