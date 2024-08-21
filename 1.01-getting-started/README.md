@@ -12,11 +12,12 @@ $ kubectl get pods
 NAME                         READY   STATUS    RESTARTS   AGE
 log-output-6c75cd7f8-z2j42   1/1     Running   0          3m23s
 
-$ kubectl logs -f log-output-6c75cd7f8-z2j42 
-2024-06-17T18:14:08.531Z: e45fef8d7b68d4a028b6384787c60f57
-2024-06-17T18:14:13.533Z: e45fef8d7b68d4a028b6384787c60f57
-2024-06-17T18:14:18.539Z: e45fef8d7b68d4a028b6384787c60f57
-2024-06-17T18:14:23.542Z: e45fef8d7b68d4a028b6384787c60f57
-2024-06-17T18:14:28.546Z: e45fef8d7b68d4a028b6384787c60f57
+$ kubectl logs -f log-output-7475c6c756-zklrw
+2024-08-21T12:55:34.085Z: bc0b4687-f1d3-448f-acec-ec6b0a049a8b
+2024-08-21T12:55:39.086Z: bc0b4687-f1d3-448f-acec-ec6b0a049a8b
+2024-08-21T12:55:44.087Z: bc0b4687-f1d3-448f-acec-ec6b0a049a8b
+2024-08-21T12:55:49.088Z: bc0b4687-f1d3-448f-acec-ec6b0a049a8b
+2024-08-21T12:55:54.090Z: bc0b4687-f1d3-448f-acec-ec6b0a049a8b
+...
 ```
 
