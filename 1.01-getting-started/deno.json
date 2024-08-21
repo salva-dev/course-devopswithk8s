@@ -1,0 +1,8 @@
+{
+  "imports": {
+  },
+  "tasks": {
+    "dev": "deno run --watch ./src/server.ts",
+    "build": "deno compile ./src/server.ts"
+  }
+}

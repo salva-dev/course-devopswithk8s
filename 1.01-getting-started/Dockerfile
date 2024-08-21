@@ -1,43 +1,29 @@
-# docker image ls | grep log-out                                                                                                                                     130 ↵
-# salvahappydev/log-output   0.1-nomulti      a034fa7cdc3f   5 minutes ago    255MB
-# salvahappydev/log-output   0.1-multi-jdk    fb2a8e7b2136   About a minute ago   154MB
+FROM denoland/deno:alpine-1.45.5 AS build-stage
+WORKDIR /usr/src/app
+COPY ./src ./src
+COPY deno.* .
+RUN deno task build
 
-#
-# docker stats
-    # CONTAINER ID   NAME                       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O         PIDS
-    # b1bd2463f06a   nomulti                    0.15%     158MiB / 7.414GiB     2.08%     4.44kB / 0B      0B / 61.4kB       43    
-    # bfc3627ee42f   nomulti                    0.15%     181MiB / 7.414GiB     2.38%     3.09kB / 0B       164kB / 73.7kB    43
-    
-FROM bellsoft/liberica-runtime-container:jdk-21-glibc AS build-stage
-#
-# Following the convention
-WORKDIR /usr/src/app 
+FROM gcr.io/distroless/cc AS cc
+FROM alpine:3.20.0
+WORKDIR /usr/bin/app
 
-# Copy the repo files into image
-COPY ./project .
+# Necesario para que se puede ejecutar ejecutables deno en alpine (por usar glibc creo...)
+# Inspired by https://github.com/dojyorin/deno_docker_image/blob/master/src/alpine.dockerfile
+COPY --from=cc --chown=root:root --chmod=755 /lib/*-linux-gnu/* /usr/local/lib/
+COPY --from=cc --chown=root:root --chmod=755 /lib/ld-linux-* /lib/
 
-# Build the project
-RUN ./mvnw clean package && cp target/*jar target/app.jar
+RUN addgroup --gid 1000 deno \
+  && adduser --uid 1000 --disabled-password deno --ingroup deno \
+  && chown deno:deno /usr/bin/app \
+  && mkdir /lib64 \
+  && ln -s /usr/local/lib/ld-linux-* /lib64/
 
-# CMD ["java", "-jar", "target/app.jar"]
+ENV LD_LIBRARY_PATH="/usr/local/lib"
 
-FROM bellsoft/liberica-runtime-container:jdk-21-glibc
-# EXPOSE 8080
-WORKDIR /usr/local/bin
+# Use the non-root user
+USER deno
 
-COPY --from=build-stage /usr/src/app/target/app.jar .
+COPY --from=build-stage /usr/src/app/server .
 
-CMD ["java", "-jar", "app.jar"]
-
-# # Create a non-root user 
-# RUN adduser -D -u 1000 appuser
-# # Switch to non-root user
-# # Be sure host has user with UID 1000
-# USER appuser
-
-# # Set variables needed
-# ENV PORT=8080
-# ENV REQUEST_ORIGIN=http://localhost:5000
-
-# # Run
-# CMD ["./server", "."]
+CMD ["./server"]
