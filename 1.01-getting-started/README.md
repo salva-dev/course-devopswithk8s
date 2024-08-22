@@ -1,4 +1,6 @@
-# course-devopswithk8s: Excecise 1.01
+# course-devopswithk8s: Excercise 1.01
+
+I have chosen deno for my project.
 
 ## Comands to build and run the app
 ```console
