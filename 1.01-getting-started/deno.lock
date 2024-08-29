@@ -2,14 +2,23 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "npm:create-hono": "npm:create-hono@0.12.0"
+      "jsr:@hono/hono@^4.5.8": "jsr:@hono/hono@4.5.8",
+      "jsr:@std/cli@^1.0.3": "jsr:@std/cli@1.0.3"
     },
-    "npm": {
-      "create-hono@0.12.0": {
-        "integrity": "sha512-/H+quXE5ygrA52EqsifTCvk3DVdEBg2bX/3OJDQrjBjopqTzNt9kCqq8LR41FFXl96NMBc7P5NqLJBi/M3hzTw==",
-        "dependencies": {}
+    "jsr": {
+      "@hono/hono@4.5.8": {
+        "integrity": "60f5b4c61edae2016022d6087b4fc381f378d337f046f56e00a3a3512c7e9c16"
+      },
+      "@std/cli@1.0.3": {
+        "integrity": "9a0488b5d2e58d29dce106a941eecec7181fae996bf0d2225563f1ca7e4b100c"
       }
     }
   },
-  "remote": {}
+  "remote": {},
+  "workspace": {
+    "dependencies": [
+      "jsr:@hono/hono@^4.5.8",
+      "jsr:@std/cli@^1.0.3"
+    ]
+  }
 }
