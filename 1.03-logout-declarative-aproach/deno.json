@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "dev": "deno run --watch ./src/server.ts",
+    "build": "deno cache ./src/server.ts && deno compile --output=./server ./src/server.ts"
+  }
+}
