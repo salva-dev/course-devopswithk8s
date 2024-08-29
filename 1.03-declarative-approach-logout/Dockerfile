@@ -4,6 +4,8 @@ COPY ./src ./src
 COPY deno.* .
 RUN deno task build
 
+# (no hay manera de saber la version) 
+# hadolint ignore=DL3006
 FROM gcr.io/distroless/cc AS cc
 
 FROM alpine:3.20.2
