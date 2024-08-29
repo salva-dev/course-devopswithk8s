@@ -6,7 +6,7 @@ RUN deno task build
 
 FROM gcr.io/distroless/cc AS cc
 
-FROM alpine:3.20.0
+FROM alpine:3.20.2
 ENV SERVER_PORT=8888
 EXPOSE ${SERVER_PORT}
 WORKDIR /app

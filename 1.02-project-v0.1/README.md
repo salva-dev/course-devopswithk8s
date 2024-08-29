@@ -5,17 +5,17 @@ I have used ENV in Dockerfile to pass the port to the server executable (deno co
 
 ## Comands to build and run the app
 ```console
-$ docker build -t salvahappydev/project-v01:latest .
+$ docker build -t salvahappydev/project:0.1.1 . 
 $ docker login
-$ docker push salvahappydev/project-v01:latest
-$ kubectl create deployment project-v01 --image=salvahappydev/project-v01:latest
+$ docker push salvahappydev/project:0.1.1
+$ kubectl create deployment project --image=salvahappydev/project:0.1.1
 deployment.apps/log-output created
 
 $ kubectl get pods
 NAME                           READY   STATUS              RESTARTS   AGE
-project-v01-79fb9d95cb-6ztwx   0/1     ContainerCreating   0          5s
+project-b4c4876c-tpnm5   0/1     ContainerCreating   0          8s
 
-$ kubectl logs -f project-v01-79fb9d95cb-6ztwx 
+$ kubectl logs deployments/project
 Server started in port 8888
 Listening on http://0.0.0.0:8888/
 ...
