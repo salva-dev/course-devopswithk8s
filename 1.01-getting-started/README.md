@@ -1,13 +1,13 @@
 # course-devopswithk8s: Excercise 1.01
 
-I have chosen deno for my project.
+I have chosen nodejs for my project.
 
 ## Comands to build and run the app
 ```console
-$ docker build -t salvahappydev/log-output:1.1.1 .
+$ docker build -t salvahappydev/log-output:1.1.3 .
 $ docker login
-$ docker push salvahappydev/log-output:1.1.1
-$ kubectl create deployment log-output --image=salvahappydev/log-output:1.1.1
+$ docker push salvahappydev/log-output:1.1.3
+$ kubectl create deployment log-output --image=salvahappydev/log-output:1.1.3
 deployment.apps/log-output created
 
 $ kubectl logs -f deployments/log-output

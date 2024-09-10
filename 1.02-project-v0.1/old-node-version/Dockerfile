@@ -1,4 +1,4 @@
-FROM alpine:3.20.0
+FROM alpine:3.20
 EXPOSE 3000
 WORKDIR /usr/app
 
