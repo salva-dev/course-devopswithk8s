@@ -1,33 +1,26 @@
-FROM denoland/deno:alpine-1.46.1 AS build-stage
-WORKDIR /app
-COPY ./src ./src
-COPY deno.* .
-RUN deno task build
+FROM alpine:3.20 AS base
+RUN apk add --no-cache gcompat nodejs npm
 
-# hadolint ignore=DL3006
-FROM gcr.io/distroless/cc AS cc
-
-FROM alpine:3.20.2
-ENV SERVER_PORT=8888
-EXPOSE ${SERVER_PORT}
+FROM base AS builder
 WORKDIR /app
 
-# Necesario para que se puede ejecutar ejecutables deno en alpine (por usar glibc creo...)
-# Inspired by https://github.com/dojyorin/deno_docker_image/blob/master/src/alpine.dockerfile
-COPY --from=cc --chown=root:root --chmod=755 /lib/*-linux-gnu/* /usr/local/lib/
-COPY --from=cc --chown=root:root --chmod=755 /lib/ld-linux-* /lib/
+COPY package*json tsconfig.json src ./
 
-RUN addgroup --gid 1000 deno \
-  && adduser --uid 1000 --disabled-password deno --ingroup deno \
-  && chown deno:deno /app \
-  && mkdir /lib64 \
-  && ln -s /usr/local/lib/ld-linux-* /lib64/
+RUN npm ci && \
+    npm run build && \
+    npm prune --production
 
-ENV LD_LIBRARY_PATH="/usr/local/lib"
+FROM base AS runner
+WORKDIR /app
 
-# Use the non-root user
-USER deno
+RUN addgroup --system --gid 1000 node
+RUN adduser --system --uid 1000 node
 
-COPY --from=build-stage /app/dist/server .
+COPY --from=builder --chown=node:node /app/node_modules /app/node_modules
+COPY --from=builder --chown=node:node /app/dist /app/dist
+COPY --from=builder --chown=node:node /app/package.json /app/package.json
 
-CMD ["sh", "-c", "./server --port=$SERVER_PORT"]
+USER node
+EXPOSE 3000
+
+CMD ["node", "/app/dist/index.js"]
