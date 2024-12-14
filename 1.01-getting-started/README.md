@@ -4,10 +4,10 @@ I have chosen nodejs for my project.
 
 ## Commands to build and run the app
 ```console
-$ docker build -t salvahappydev/log-output:1.1.4 .
+$ docker build -t salvahappydev/log-output:1.1.6 .
 $ docker login
-$ docker push salvahappydev/log-output:1.1.4
-$ kubectl create deployment log-output --image=salvahappydev/log-output:1.1.4
+$ docker push salvahappydev/log-output:1.1.6
+$ kubectl create deployment log-output --image=salvahappydev/log-output:1.1.6
 deployment.apps/log-output created
 
 $ kubectl logs -f deployments/log-output

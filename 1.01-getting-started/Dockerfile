@@ -1,8 +1,9 @@
 FROM alpine:3.21 AS base
-RUN apk add --no-cache gcompat nodejs npm
+RUN apk add --no-cache gcompat nodejs
 
 FROM base AS builder
 WORKDIR /app
+RUN apk add --no-cache npm
 
 COPY package*json tsconfig.json src ./
 
