@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logout-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logout
+  template:
+    metadata:
+      labels:
+        app: logout
+    spec:
+      containers:
+        - name: logout
+          image: salvahappydev/log-output:1.1.7

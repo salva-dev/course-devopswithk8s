@@ -16,4 +16,3 @@ $ kubectl logs -f deployments/log-output
 2024-08-29T10:34:51.969Z: 228ff10b-1f36-44f5-9ab8-2fb63ef03f33
 ...
 ```
-
