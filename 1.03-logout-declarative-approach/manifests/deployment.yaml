@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: logout
-          image: salvahappydev/log-output:1.1.7
+          image: salvahappydev/log-output:1.1.8
