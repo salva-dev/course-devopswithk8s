@@ -15,6 +15,6 @@ kubectl create deployment ${PROJECT_NAME} --image=${IMAGE_TAG}
 deployment.apps/dwk-project created
 
 $ kubectl logs -f deployments/${PROJECT_NAME}
-Server running on port 3000
+Server running on port 3005
 ...
 ```
