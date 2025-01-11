@@ -22,6 +22,9 @@ COPY --from=builder --chown=node:node /app/dist /app/dist
 COPY --from=builder --chown=node:node /app/package.json /app/package.json
 
 USER node
-EXPOSE 3000
+
+ENV PORT=3005
+EXPOSE ${PORT}
 
 CMD ["node", "/app/dist/index.js"]
+# CMD ["sh", "-c", "node /app/dist/index.js"]
