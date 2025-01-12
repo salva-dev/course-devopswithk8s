@@ -5,7 +5,7 @@
 ## Commands to build and run the app
 ```console
 # Delete the logout ingress
-$ 
+$ kubectl delete ingress log-out-ingress
 
 # Create new for project 0.5
 $ PROJECT_NAME="dwk-project" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:0.5.0" && 
@@ -21,9 +21,6 @@ deployment.apps/dwk-project configured
 service/dwk-project-svc configured
 ingress.networking.k8s.io/dwk-project-ingress created
 
-$ kubectl logs -f deployments/${PROJECT_NAME}
-Server running on port 3008
-
-# Después de la siguiente instruccion comprobar con navegador http://localhost:8081
+# Comprobar con navegador http://localhost:8081
 ...
 ```
