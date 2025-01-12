@@ -24,6 +24,6 @@ ingress.networking.k8s.io/log-out-ingress created
 $ kubectl logs -f deployments/${PROJECT_NAME}
 Server running on port 3008
 
-# Después de la siguiente instruccion comprobar con navegador http://localhost:8081/log-out
+# Después de la siguiente instruccion comprobar con navegador http://localhost:8081
 ...
 ```

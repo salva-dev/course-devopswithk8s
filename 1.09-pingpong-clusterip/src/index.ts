@@ -22,7 +22,7 @@ function incrementRequestCount() {
   console.log(`Current request count: ${requestStore.count}`);
 }
 
-app.get('/', (req, res) => {
+app.get('/pingpong', (req, res) => {
   const response = `pong ${requestStore.count}`;
   incrementRequestCount();
   res.send(response);
