@@ -1,9 +1,12 @@
 # course-devopswithk8s: Exercise 1.01
 
 I have chosen nodejs for my project.
+I've done the steps for create k3d cluster indicated in the course
 
 ## Commands to build and run the app
 ```console
+$ k3d cluster create -a 2
+
 $ docker build -t salvahappydev/log-output:1.1.6 .
 $ docker login
 $ docker push salvahappydev/log-output:1.1.6
