@@ -1,26 +1,44 @@
+// src/index.ts
 import crypto from 'crypto';
+
+import express, { Request, Response } from 'express';
+import path from 'path';
+
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 // For capture CTRL+C if run with  "docker run -it"
 process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
 
-// Generate a random string
-function generateRandomString() {
-    return crypto.randomBytes(16).toString('hex');
-}
+app.get('/log-out', (req: Request, res: Response) => {
+  const randomString = generateRandomString();
+  const timestamp = new Date().toISOString();
+  res.send(`${timestamp}: ${randomString}`);
+});
 
-// Store the random string
-const randomString = generateRandomString();
+const server = app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
 // Log the string with timestamp every 5 seconds
 setInterval(() => {
-    const timestamp = new Date().toISOString();
-    console.log(`${timestamp}: ${randomString}`);
+  const randomString = generateRandomString();
+  const timestamp = new Date().toISOString();
+  console.log(`${timestamp}: ${randomString}`);
 }, 5000);
 
 
+function generateRandomString() {
+  return crypto.randomBytes(16).toString('hex');
+}
+
 function gracefulShutdown() {
   console.log('Shutting down');
-  process.exit(0);
+  server.close(() => {
+    console.log('HTTP server closed');
+    process.exit(0);
+  });
 }
 

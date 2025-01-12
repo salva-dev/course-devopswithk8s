@@ -4,24 +4,26 @@
 
 ## Commands to build and run the app
 ```console
-$ PROJECT_NAME="log-output" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:1.1.11" && 
-echo ${IMAGE_TAG} && 
-docker build -t ${IMAGE_TAG} . && 
-docker login && 
-docker push ${IMAGE_TAG} && 
-kubectl apply -f manifests/deployment.yaml && 
-kubectl apply -f manifests/deployment.yaml 
+# Delete the logout ingress
+$ 
 
-1.1.11: digest: sha256:55b0655f2a844cfe96e56ffaee5cf05e91f9d7afe466b197a34b7d42c2481719 size: 1985
-deployment.apps/log-output created
-deployment.apps/log-output unchanged
+# Create new for project 0.5
+$ PROJECT_NAME="log-out" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:2.0.0" && 
+ echo ${IMAGE_TAG} && 
+ docker build -t ${IMAGE_TAG} . && 
+ docker login &&  docker push ${IMAGE_TAG} && 
+ kubectl apply -f manifests/deployment.yaml &&
+ kubectl apply -f manifests/service.yaml &&
+ kubectl apply -f manifests/ingress.yaml
+
+2.0.0: digest: sha256:4a28408d8ac25dd1167850a4d34c402f18c5ba547bc2cdfff46ac27ddb7a9530 size: 1985
+deployment.apps/log-out created
+service/log-out-svc created
+ingress.networking.k8s.io/log-out-ingress created
 
 $ kubectl logs -f deployments/${PROJECT_NAME}
-2025-01-11T12:54:31.567Z: 553f9f87a0fd02b03a8510e73c250f47
-2025-01-11T12:54:36.571Z: 553f9f87a0fd02b03a8510e73c250f47
-2025-01-11T12:54:41.576Z: 553f9f87a0fd02b03a8510e73c250f47
-2025-01-11T12:54:46.581Z: 553f9f87a0fd02b03a8510e73c250f47
-2025-01-11T12:54:51.586Z: 553f9f87a0fd02b03a8510e73c250f47
-2025-01-11T12:54:56.588Z: 553f9f87a0fd02b03a8510e73c250f47
+Server running on port 3008
+
+# Después de la siguiente instruccion comprobar con navegador http://localhost:8081/log-out
 ...
 ```

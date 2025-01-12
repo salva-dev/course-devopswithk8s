@@ -1,17 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output
+  name: log-out
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: logout
+      app: log-out
   template:
     metadata:
       labels:
-        app: logout
+        app: log-out
     spec:
       containers:
-        - name: log-output
-          image: salvahappydev/log-output:1.1.11
+        - name: dwk-project
+          image: salvahappydev/log-out:2.0.0
+          env:
+          - name: PORT
+            value: "3008"
