@@ -12,10 +12,20 @@ const port = process.env.PORT || 3000;
 process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
 
-app.get('/', (req: Request, res: Response) => {
-  const randomString = generateRandomString();
-  const timestamp = new Date().toISOString();
-  res.send(`${timestamp}: ${randomString}`);
+// In-memory store for request count
+const requestStore = {
+  count: 0,
+};
+
+function incrementRequestCount() {
+  requestStore.count++;
+  console.log(`Current request count: ${requestStore.count}`);
+}
+
+app.get('/', (req, res) => {
+  const response = `pong ${requestStore.count}`;
+  incrementRequestCount();
+  res.send(response);
 });
 
 const server = app.listen(port, () => {

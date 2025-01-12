@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: dwk-project
-          image: salvahappydev/log-out:2.0.1
+          image: salvahappydev/log-out:2.0.0
           env:
           - name: PORT
             value: "3008"

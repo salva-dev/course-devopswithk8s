@@ -8,7 +8,7 @@
 $ 
 
 # Create new for project 0.5
-$ PROJECT_NAME="log-out" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:2.0.1" && 
+$ PROJECT_NAME="log-out" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:2.0.0" && 
  echo ${IMAGE_TAG} && 
  docker build -t ${IMAGE_TAG} . && 
  docker login &&  docker push ${IMAGE_TAG} && 
