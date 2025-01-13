@@ -12,9 +12,20 @@ spec:
       labels:
         app: log-out
     spec:
+      volumes: # Define volume
+        - name: shared-image
+          emptyDir: {}
       containers:
-        - name: dwk-project
-          image: salvahappydev/log-out:2.0.1
+        - name: log-out
+          image: salvahappydev/log-out:3.0.2
+          volumeMounts: # Mount volume
+          - name: shared-image
+            mountPath: /app/files
           env:
           - name: PORT
             value: "3008"
+        - name: log-out-writer
+          image: salvahappydev/log-out-writer:3.0.2
+          volumeMounts: # Mount volume
+          - name: shared-image
+            mountPath: /app/files

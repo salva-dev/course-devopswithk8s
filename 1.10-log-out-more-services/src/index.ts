@@ -1,38 +1,26 @@
 // src/index.ts
 import crypto from 'crypto';
+import { readFile } from 'fs/promises';
 
 import express, { Request, Response } from 'express';
 import path from 'path';
 
-
+const logFilePath = './files/log.txt'
 const app = express();
 const port = process.env.PORT || 3000;
 
-// For capture CTRL+C if run with  "docker run -it"
-process.on('SIGTERM', gracefulShutdown);
-process.on('SIGINT', gracefulShutdown);
-
-app.get('/', (req: Request, res: Response) => {
-  const randomString = generateRandomString();
-  const timestamp = new Date().toISOString();
-  res.send(`${timestamp}: ${randomString}`);
+app.get('/', async (req: Request, res: Response) => {
+  const logOutString = await readFile(logFilePath, 'utf8');
+  res.send(logOutString);
 });
 
 const server = app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-// Log the string with timestamp every 5 seconds
-setInterval(() => {
-  const randomString = generateRandomString();
-  const timestamp = new Date().toISOString();
-  console.log(`${timestamp}: ${randomString}`);
-}, 5000);
-
-
-function generateRandomString() {
-  return crypto.randomBytes(16).toString('hex');
-}
+// For capture CTRL+C if run with  "docker run -it"
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);
 
 function gracefulShutdown() {
   console.log('Shutting down');
@@ -41,4 +29,3 @@ function gracefulShutdown() {
     process.exit(0);
   });
 }
-
