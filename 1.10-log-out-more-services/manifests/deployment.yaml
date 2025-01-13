@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pingpong
+  name: log-out
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pingpong
+      app: log-out
   template:
     metadata:
       labels:
-        app: pingpong
+        app: log-out
     spec:
       containers:
-        - name: pingpong
-          image: salvahappydev/pingpong:1.0.1
+        - name: dwk-project
+          image: salvahappydev/log-out:2.0.1
           env:
           - name: PORT
             value: "3008"

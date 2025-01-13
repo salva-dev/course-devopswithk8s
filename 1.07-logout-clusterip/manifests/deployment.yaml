@@ -13,7 +13,7 @@ spec:
         app: log-out
     spec:
       containers:
-        - name: dwk-project
+        - name: log-out
           image: salvahappydev/log-out:2.0.1
           env:
           - name: PORT
