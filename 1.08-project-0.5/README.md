@@ -7,7 +7,7 @@
 # Delete the logout ingress
 $ kubectl delete ingress log-out-ingress
 
-# Create new for project 0.5
+# Create images
 $ PROJECT_NAME="dwk-project" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:0.5.0" && 
  echo ${IMAGE_TAG} && 
  docker build -t ${IMAGE_TAG} . && 
@@ -21,6 +21,6 @@ deployment.apps/dwk-project configured
 service/dwk-project-svc configured
 ingress.networking.k8s.io/dwk-project-ingress created
 
-# Comprobar con navegador http://localhost:8081
+# After this, Check with browser http://localhost:8081
 ...
 ```

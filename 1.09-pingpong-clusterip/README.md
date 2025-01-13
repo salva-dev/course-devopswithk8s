@@ -7,7 +7,7 @@
 # Delete the logout ingress
 $ 
 
-# Create new for project 0.5
+# Create images
 $ PROJECT_NAME="pingpong" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:1.0.1" && 
  echo ${IMAGE_TAG} && 
  docker build -t ${IMAGE_TAG} . && 
@@ -17,6 +17,6 @@ $ PROJECT_NAME="pingpong" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG=
  kubectl apply -f manifests/ingress.yaml
 
 
-# Después de la siguiente instruccion comprobar con navegador http://localhost:8081/pingpong
+# After this, Check with browser http://localhost:8081/pingpong
 ...
 ```

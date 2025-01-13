@@ -22,6 +22,6 @@ service/dwk-project-svc created
 $ kubectl logs -f deployments/${PROJECT_NAME}
 Server running on port 3008
 
-# Después de la siguiente instruccion comprobar con navegador http://localhost:8082
+# After this, check with browser http://localhost:8082
 ...
 ```
