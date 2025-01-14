@@ -1,11 +1,9 @@
-# course-devopswithk8s: Exercise 1.02
-
-
+# course-devopswithk8s: Exercise 1.08
 
 ## Commands to build and run the app
 ```console
 # Delete the logout ingress
-$ kubectl delete ingress log-out-ingress
+$ kubectl delete ingress --all
 
 # Create images
 $ PROJECT_NAME="dwk-project" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:0.5.0" && 

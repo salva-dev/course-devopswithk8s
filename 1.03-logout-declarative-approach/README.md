@@ -1,6 +1,4 @@
-# course-devopswithk8s: Exercise 1.02
-
-
+# course-devopswithk8s: Exercise 1.03
 
 ## Commands to build and run the app
 ```console
