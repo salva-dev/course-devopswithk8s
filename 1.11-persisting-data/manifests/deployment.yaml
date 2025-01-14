@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-out
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-out
+  template:
+    metadata:
+      labels:
+        app: log-out
+    spec:
+      volumes: # Define volume
+        - name: shared-counter
+          persistentVolumeClaim:
+            claimName: my-example-pv-claim
+      containers:
+        - name: log-out
+          image: salvahappydev/log-out:4.0.2
+          volumeMounts: # Mount volume
+          - name: shared-counter
+            mountPath: /app/files
+          env:
+          - name: PORT
+            value: "3008"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingpong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      volumes: # Define volume
+        - name: shared-counter
+          persistentVolumeClaim:
+            claimName: my-example-pv-claim
+      containers:
+        - name: pingpong
+          image: salvahappydev/pingpong:4.0.2
+          volumeMounts: # Mount volume
+          - name: shared-counter
+            mountPath: /app/files
+          env:
+          - name: PORT
+            value: "3008"

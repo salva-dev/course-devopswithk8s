@@ -27,8 +27,13 @@ setInterval(async () => {
 
 async function getTimeStampHashPingPongNumberString() {
   const timespampAndHash = generateTimeStampAndHash();
-  const pingpongNumber = await readFile(sharedFile, "utf8");
-
+  let pingpongNumber = '0';
+  try {
+    pingpongNumber = await readFile(sharedFile, "utf8");
+  } catch (error) {
+    console.log(`${sharedFile} still doens't exists. Return ping 0`)
+  }
+   
   const result = `${timespampAndHash}\nPing / Pongs: ${pingpongNumber}`;
 
   return result;

@@ -5,7 +5,7 @@
 ## Commands to build and run the app
 ```console
 # Delete the ingress's
-$ kubectl delete ingress dwk-project-ingress pingpong-ingress 
+$ kubectl delete ingress --all  
 
 # Create images
 $ PROJECT_NAME="log-out" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:3.0.2" && 

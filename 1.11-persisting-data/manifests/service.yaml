@@ -9,3 +9,16 @@ spec:
   ports:
     - port: 2344 
       targetPort: 3008 # This is the target port in our deploy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pingpong-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: pingpong # This is the app as declared in the deployment.
+  ports:
+    - port: 2345 
+      targetPort: 3008 # This is the target port in our deploy
+---
