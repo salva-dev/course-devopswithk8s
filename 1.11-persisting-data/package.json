@@ -1,0 +1,21 @@
+{
+  "name": "project-node-version",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "tsx watch src/log-out.ts",
+    "build": "tsc",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.21.2",
+    "path": "^0.12.7",
+    "tsx": "^4.7.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.17.12",
+    "typescript": "^5.6.2"
+  },
+  "type": "module"
+}
