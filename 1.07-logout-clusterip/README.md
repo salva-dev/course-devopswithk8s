@@ -4,8 +4,6 @@
 
 ## Commands to build and run the app
 ```console
-# Delete the logout ingress
-$ 
 
 # Create new for project 0.5
 $ PROJECT_NAME="log-out" && IMAGE="salvahappydev/${PROJECT_NAME}" && IMAGE_TAG="${IMAGE}:2.0.1" && 
